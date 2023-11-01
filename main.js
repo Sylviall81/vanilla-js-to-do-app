@@ -6,14 +6,10 @@ const newTaskInput = document.querySelector('#new-task-input');
 
 const tasks = [];
 
-
 //persistencia de datos con LocalStorage
-
 function saveTasksToLocalStorage(tasks){
     localStorage.setItem('tasks', JSON.stringify(tasks))
-
 }
-
 
 window.onload = function(){
     const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -23,13 +19,11 @@ window.onload = function(){
 
     app.tasks.forEach((task) =>{
         return addTaskToList(task, app.tasksList);
-
     })
 }
 
 //objeto global app
 const app = {
-
     tasks: tasks,
     tasksList: tasksList,
     newTaskInput: newTaskInput,
@@ -68,6 +62,7 @@ function createTaskElement(task){
     taskCheckbox.addEventListener('change', ()=>{
     task.isCompleted = taskCheckbox.checked;
     taskText.classList.toggle("completed", task.isCompleted);
+    saveTasksToLocalStorage(app.tasks);
     })
 
     const taskText = document.createElement("span");
@@ -75,25 +70,30 @@ function createTaskElement(task){
     taskText.classList.toggle("completed", task.isCompleted);
 
     const taskDeleteButton = document.createElement('button');
- taskDeleteButton.textContent = "Delete";
- taskDeleteButton.className = 'delete-button';
- taskDeleteButton.addEventListener("click", () => {
-    //eliminar tarea de la lista
+    taskDeleteButton.textContent = "Delete";
+    taskDeleteButton.className = 'delete-button';
+
+    taskDeleteButton.addEventListener("click", () => {
+    //eliminar tarea del html
+        taskElement.remove();
     //la elimino del array
-    taskElement.remove();
 
-    const taskIndex = app.tasks.indexOf(task);
+        const taskIndex = app.tasks.indexOf(task);
+        console.log(taskIndex)
 
-    if(taskIndex > -1) {
-    tasks.splice(taskIndex, 1);
-    }
- });
+        if(taskIndex > -1) {
+        app.tasks.splice(taskIndex, 1);
+        
+        saveTasksToLocalStorage(app.tasks);
+        console.log(app.tasks);
+        }
+    });
 
- taskElement.appendChild(taskCheckbox);
- taskElement.appendChild(taskText);
- taskElement.appendChild(taskDeleteButton);
+    taskElement.appendChild(taskCheckbox);
+    taskElement.appendChild(taskText);
+    taskElement.appendChild(taskDeleteButton);
 
-return taskElement;
+    return taskElement;
 }
 
 addTaskButton.addEventListener('click', () => {
@@ -105,5 +105,3 @@ newTaskInput.addEventListener('keydown', (event) => {
         addTask(app);
     }
 })
-
- 
