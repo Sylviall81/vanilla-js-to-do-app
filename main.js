@@ -6,6 +6,27 @@ const newTaskInput = document.querySelector('#new-task-input');
 
 const tasks = [];
 
+
+//persistencia de datos con LocalStorage
+
+function saveTasksToLocalStorage(tasks){
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+
+}
+
+
+window.onload = function(){
+    const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    app.tasks = savedTasks.map((task) => {
+        return createTask(task.title, task.isCompleted);
+    })
+
+    app.tasks.forEach((task) =>{
+        return addTaskToList(task, app.tasksList);
+
+    })
+}
+
 //objeto global app
 const app = {
 
@@ -35,6 +56,7 @@ function addTask(app){
     app.tasks.push(newTask);
 
     addTaskToList(newTask, app.tasksList);
+    saveTasksToLocalStorage(app.tasks);
     app.newTaskInput.value = ''; //borra la tarea para q quede vacio el input
 }
 
@@ -57,7 +79,15 @@ function createTaskElement(task){
  taskDeleteButton.className = 'delete-button';
  taskDeleteButton.addEventListener("click", () => {
     //eliminar tarea de la lista
- })
+    //la elimino del array
+    taskElement.remove();
+
+    const taskIndex = app.tasks.indexOf(task);
+
+    if(taskIndex > -1) {
+    tasks.splice(taskIndex, 1);
+    }
+ });
 
  taskElement.appendChild(taskCheckbox);
  taskElement.appendChild(taskText);
@@ -68,6 +98,12 @@ return taskElement;
 
 addTaskButton.addEventListener('click', () => {
     addTask(app);
+})
+
+newTaskInput.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        addTask(app);
+    }
 })
 
  
