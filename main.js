@@ -81,10 +81,11 @@ function createTaskElement(task){
     taskDeleteButton.className = 'delete-button';
 
     taskDeleteButton.addEventListener("click", () => {
-    //eliminar tarea del html
+    
+        //eliminar tarea del html
         taskElement.remove();
-    //la elimino del array
 
+    //la elimino del array
         const taskIndex = app.tasks.indexOf(task);
         console.log(taskIndex)
 
