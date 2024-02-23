@@ -1,12 +1,19 @@
 'use strict'
 
-const tasksList = document.querySelector('#tasks-list');
-const addTaskButton = document.querySelector('#add-task-button');
-const newTaskInput = document.querySelector('#new-task-input');
+const tasksList = document.querySelector('#tasks-list'); //Atrapa en el DOM el elemento 'ol' o ''ul'
+const addTaskButton = document.querySelector('#add-task-button'); //atrapa en el DOM el boton
+const newTaskInput = document.querySelector('#new-task-input');//atrapa el iput text donde van las tareas o items de lista
 
-const tasks = [];
+const tasks = [];//array q almacena tareas ¿?
 
-//persistencia de datos con LocalStorage
+//objeto global app
+const app = {
+    tasks: tasks,
+    tasksList: tasksList,
+    newTaskInput: newTaskInput,
+}
+
+//persistencia de datos con LocalStorage (salva el array al local storage para q se mantenga cuando cierro el navegador)
 function saveTasksToLocalStorage(tasks){
     localStorage.setItem('tasks', JSON.stringify(tasks))
 }
@@ -22,12 +29,12 @@ window.onload = function(){
     })
 }
 
-//objeto global app
-const app = {
-    tasks: tasks,
-    tasksList: tasksList,
-    newTaskInput: newTaskInput,
-}
+// //objeto global app
+// const app = {
+//     tasks: tasks,
+//     tasksList: tasksList,
+//     newTaskInput: newTaskInput,
+// }
 
 
 function createTask (title, isCompleted = false){
