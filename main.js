@@ -6,6 +6,7 @@ const newTaskInput = document.querySelector('#new-task-input');//atrapa el iput 
 
 const tasks = [];//array q almacena tareas ¿?
 
+
 //objeto global app
 const app = {
     tasks: tasks,

@@ -1,0 +1,253 @@
+:root {
+    --primary-color: #4361ee;
+    --primary-light: #4895ef;
+    --primary-dark: #3f37c9;
+    --accent-color: #f72585;
+    --text-color: #2b2d42;
+    --text-light: #8d99ae;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --completed-color: #4cc9f0;
+    --delete-color: #f72585;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    font-family: "Ubuntu", sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .app-wrapper {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  
+  header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  
+  .input-section {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  input,
+  button {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1rem;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+  
+  #new-task-input {
+    flex: 1;
+    background-color: #f1f3f5;
+    transition: var(--transition);
+  }
+  
+  #new-task-input:focus {
+    background-color: white;
+    box-shadow: 0 0 0 2px var(--primary-light);
+  }
+  
+  #add-task-button {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+  }
+  
+  #add-task-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .tasks-container {
+    padding: 20px;
+  }
+  
+  .tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .tasks-header h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .task-count {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+  }
+  
+  li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  li .task-text {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+  }
+  
+  li .task-text::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-light);
+    border-radius: 50%;
+    transition: var(--transition);
+  }
+  
+  li.completed {
+    border-left-color: var(--completed-color);
+    opacity: 0.8;
+  }
+  
+  li.completed .task-text {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+  
+  li.completed .task-text::before {
+    background-color: var(--completed-color);
+    border-color: var(--completed-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .delete-btn {
+    background-color: transparent;
+    color: var(--text-light);
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .delete-btn:hover {
+    color: var(--delete-color);
+    background-color: rgba(247, 37, 133, 0.1);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .input-section {
+      flex-direction: column;
+    }
+  
+    #new-task-input,
+    #add-task-button {
+      width: 100%;
+    }
+  
+    h1 {
+      font-size: 1.8rem;
+    }
+  
+    li {
+      padding: 12px;
+    }
+  }
+  
+  /* Animation for new tasks */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  li {
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  
